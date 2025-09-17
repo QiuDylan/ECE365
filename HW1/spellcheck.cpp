@@ -21,21 +21,16 @@ hashTable* parse_dictionary(string filename) {
     ifstream inFile;
     inFile.open(filename);
     string line;
-    // Error handling for a failed read
     if (!inFile.is_open()) {
         throw invalid_argument(
-            "\n File for dictionary failed to open: \n Check permissions and "
-            "existence?");
+            "\n File for dictionary failed to open!! \n");
     }
-    // This might be cheating but I don't believe anything was specified against
-    // it Getting an upper bound for size
+   
     int fsize = 0;
     while (getline(inFile, line)) {
         fsize++;
     }
     inFile.close();
-
-    const regex regex_val = regex("^[A-Za-z'-]+$");
 
     inFile.open(filename);
     hashTable* table = new hashTable(fsize);
@@ -71,7 +66,7 @@ void spellcheck(string in_file, string out_file, hashTable& table) {
             string a = string(1, tolower(read_line[i]));
             if (regex_match(a, regex_val) > 0 || isdigit(read_line[i]) > 0) {
                 if (isdigit(read_line[i])) {
-                shouldCheck == false;
+                shouldCheck = false;
                 } else if (word.size() < 21) {
                 word += a;
                 }
