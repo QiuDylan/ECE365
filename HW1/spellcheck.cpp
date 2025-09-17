@@ -12,6 +12,14 @@ using namespace std;
 
 regex word_re("[A-Za-z0-9\\-']+");
 
+string str_tolower(string s)
+{
+    transform(s.begin(), s.end(), s.begin(),
+        [](unsigned char c){ return std::tolower(c); });
+    return s;
+}
+
+
 int main() {
     string dict_name = "wordlist_small";
     cout << "Enter dictionary file: ";
