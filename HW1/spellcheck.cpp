@@ -112,12 +112,12 @@ int main() {
     hashTable* table = parse_dictionary(dict_name);
     clock_t t2 = clock();
     double timeDiff = ((double)(t2 - t1)) / CLOCKS_PER_SEC;
-    cout << "Hashmap Loaded. CPU time was " << timeDiff << " seconds.\n";
+    cout << "Hashmap Loaded. Computing time was " << timeDiff << " seconds.\n";
     t1 = clock();
     spellcheck(spellcheck_name, output, *table);
     t2 = clock();
     timeDiff = ((double)(t2 - t1)) / CLOCKS_PER_SEC;
-    cout << "Spellcheck Complete. CPU time was " << timeDiff << " seconds.\n";
+    cout << "Spellcheck Complete. Computing time was " << timeDiff << " seconds.\n";
 
     return 0;
 }
