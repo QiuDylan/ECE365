@@ -10,6 +10,8 @@
 
 using namespace std;
 
+regex word_re("[A-Za-z0-9\\-']+");
+
 int main() {
     string dict_name = "wordlist_small";
     cout << "Enter dictionary file: ";
