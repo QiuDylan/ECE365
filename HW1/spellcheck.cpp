@@ -68,7 +68,7 @@ void spellcheck(string in_file, string out_file, hashTable& table) {
             string a = string(1, tolower(read_line[i]));
             if (regex_match(a, regex_val) > 0 || isdigit(read_line[i]) > 0) {
             if (isdigit(read_line[i])) {
-                shouldCheck == false;
+                shouldCheck = false;
             } else if (word.size() < 21) {
                 word += a;
             }
