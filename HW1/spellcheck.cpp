@@ -79,12 +79,10 @@ void spellcheck(string in_file, string out_file, hashTable& table) {
                     outFile << "Unknown word at line " << to_string(line_number) << ": "
                         << word << "\n";
                 }
-                // Word is complete
                 shouldCheck = true;
                 word = "";
             }
         }
-        // Handling words that might've been missed at the end of the string
         if (shouldCheck && word.size() > 20) {
             word.pop_back();
             outFile << "Long word at line " << to_string(line_number)

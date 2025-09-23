@@ -139,7 +139,7 @@ bool hashTable::rehash() {
     return true;
 }
 
-// Get prime function - returns a prime number at least as large as size
+// Get prime function
 unsigned int hashTable::getPrime(int size) {
     // Prime numbers
     static const unsigned int primes[] = {
