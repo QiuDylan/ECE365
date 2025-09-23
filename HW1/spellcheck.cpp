@@ -26,8 +26,7 @@ hashTable* parse_dictionary(string filename) {
     // Error handling for a failed read
     if (!inFile.is_open()) {
         throw invalid_argument(
-            "\n File for dictionary failed to open: \n Check permissions and "
-            "existence?");
+            "\n File for dictionary failed to open:");
     }
     int fsize = 0;
     while (getline(inFile, line)) {
