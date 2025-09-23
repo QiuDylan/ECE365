@@ -46,7 +46,7 @@ hashTable* parse_dictionary(string filename) {
     inFile.close();
     return table;
 }
-
+// Check if word is in dictionary 
 void spellcheck(string in_file, string out_file, hashTable& table) {
     ifstream inFile;
     inFile.open(in_file);
@@ -62,12 +62,12 @@ void spellcheck(string in_file, string out_file, hashTable& table) {
         string word = "";
         bool shouldCheck = true;
         for (int i = 0; i < read_line.size(); i++) {
-            string a = string(1, tolower(read_line[i]));
-            if (regex_match(a, regex_val) > 0 || isdigit(read_line[i]) > 0) {
+            string num = string(1, tolower(read_line[i]));
+            if (regex_match(num, regex_val) > 0 || isdigit(read_line[i]) > 0) {
                 if (isdigit(read_line[i])) {
                     shouldCheck = false;
                 } else if (word.size() < 21) {
-                    word += a;
+                    word += num;
                 }
             } else {
                 if (shouldCheck && word.size() > 20) {
@@ -78,7 +78,6 @@ void spellcheck(string in_file, string out_file, hashTable& table) {
                     outFile << "Unknown word at line " << to_string(line_number) << ": "
                             << word << "\n";
                 }
-                
                 shouldCheck = true;
                 word = "";
             }
@@ -117,5 +116,5 @@ int main() {
     timeDiff = ((double)(t2 - t1)) / CLOCKS_PER_SEC;
     cout << "Spellcheck Complete. CPU time was " << timeDiff << " seconds.\n";
 
-  return 0;
+    return 0;
 }
