@@ -10,7 +10,7 @@
 
 using namespace std;
 
-const regex regex_val = regex("^[A-Za-z'-] + $");
+// const regex regex_val = regex("^[A-Za-z'-] + $");
 // From cpp reference
 string str_tolower(string s) {
     transform(s.begin(), s.end(), s.begin(),
@@ -19,6 +19,7 @@ string str_tolower(string s) {
 }
 
 hashTable* parse_dictionary(string filename) {
+    const regex regex_val = regex("^[A-Za-z'-] + $");
     ifstream inFile;
     inFile.open(filename);
     string line;
