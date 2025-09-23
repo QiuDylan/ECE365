@@ -10,14 +10,14 @@
 
 using namespace std;
 
-// const regex regex_val = regex("^[A-Za-z'-] + $");
+const regex regex_val = regex("^[A-Za-z'-] + $");
 // From cpp reference
 string str_tolower(string s) {
     transform(s.begin(), s.end(), s.begin(),
         [](unsigned char c) { return tolower(c); });
     return s;
 }
-
+// Insert dictionary into hash table
 hashTable* parse_dictionary(string filename) {
     const regex regex_val = regex("^[A-Za-z'-] + $");
     ifstream inFile;
@@ -34,11 +34,10 @@ hashTable* parse_dictionary(string filename) {
         fsize++;
     }
     inFile.close();
-    //const regex regex_val = regex("^[A-Za-z'-]+$");
+    const regex regex_val = regex("^[A-Za-z'-]+$");
     inFile.open(filename);
     hashTable* table = new hashTable(fsize);
     while (getline(inFile, line)) {
-        // cout << regex_match(line,regex_val) << '\n';
         if (line.size() <= 20 && regex_match(line, regex_val)) {
             string S = str_tolower(line);
             table->insert(S);
