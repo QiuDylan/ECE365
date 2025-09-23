@@ -15,15 +15,15 @@ hashTable::hashTable(int size) {
 
 // Insert function
 int hashTable::insert(const std::string &key, void *pv) {
-    // Check if key already exists
+    
     if (contains(key)) {
         return 1;
     }
     
-    // Check if rehash is needed (load factor > 0.5)
+    // Check if rehash is needed
     if (filled >= capacity / 2) {
         if (!rehash()) {
-            return 2; // Rehash failed
+            return 2; 
         }
     }
     
@@ -64,14 +64,14 @@ void *hashTable::getPointer(const std::string &key, bool *b) {
     }
 }
 
-// Set pointer function
+// get pointer function
 int hashTable::setPointer(const std::string &key, void *pv) {
     int pos = findPos(key);
     if (pos != -1) {
         data[pos].pv = pv;
-        return 0; // Success
+        return 0; 
     }
-    return 1; // Key not found
+    return 1; 
 }
 
 // Remove function
@@ -81,10 +81,10 @@ bool hashTable::remove(const std::string &key) {
         data[pos].isDeleted = true;
         return true;
     }
-    return false; // Key not found
+    return false; 
 }
 
-// Hash function - uses std::hash for strings
+// Hash function
 int hashTable::hash(const std::string &key) {
     std::hash<std::string> hasher;
     return hasher(key) % capacity;
@@ -96,17 +96,16 @@ int hashTable::findPos(const std::string &key) {
     
     while (data[pos].isOccupied) {
         if (!data[pos].isDeleted && data[pos].key == key) {
-            return pos; // Found the key
+            return pos;
         }
         pos = (pos + 1) % capacity;
         
-        // If we've gone full circle, the key is not in the table
         if (pos == hash(key)) {
             break;
         }
     }
     
-    return -1; // Key not found
+    return -1; 
 }
 
 // Rehash function
@@ -125,10 +124,8 @@ bool hashTable::rehash() {
     for (int i = 0; i < oldCapacity; i++) {
         if (oldData[i].isOccupied && !oldData[i].isDeleted) {
             if (insert(oldData[i].key, oldData[i].pv) != 0) {
-                // If insertion fails, restore old table
                 data = oldData;
                 capacity = oldCapacity;
-                // Recalculate filled count
                 filled = 0;
                 for (int j = 0; j < capacity; j++) {
                     if (data[j].isOccupied && !data[j].isDeleted) {
@@ -139,18 +136,17 @@ bool hashTable::rehash() {
             }
         }
     }
-    
     return true;
 }
 
 // Get prime function - returns a prime number at least as large as size
 unsigned int hashTable::getPrime(int size) {
-    // Precomputed prime numbers
+    // Prime numbers
     static const unsigned int primes[] = {
         53, 97, 193, 389, 769, 1543, 3079, 6151, 12289, 24593,
         49157, 98317, 196613, 393241, 786433, 1572869, 3145739,
         6291469, 12582917, 25165843, 50331653, 100663319,
-        201326611, 402653189, 805306457, 1610612741
+        201326611, 402653189, 805306457, 1610612741,3221225533
     };
     
     const int numPrimes = sizeof(primes) / sizeof(primes[0]);
@@ -160,7 +156,5 @@ unsigned int hashTable::getPrime(int size) {
             return primes[i];
         }
     }
-    
-    // If size is larger than our largest prime, return the largest prime
     return primes[numPrimes - 1];
 }
