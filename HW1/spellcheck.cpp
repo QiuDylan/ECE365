@@ -28,27 +28,24 @@ hashTable* parse_dictionary(string filename) {
             "\n File for dictionary failed to open: \n Check permissions and "
             "existence?");
     }
-
     int fsize = 0;
     while (getline(inFile, line)) {
         fsize++;
     }
     inFile.close();
-
-    const regex regex_val = regex("^[A-Za-z'-]+$");
-
+    //const regex regex_val = regex("^[A-Za-z'-]+$");
     inFile.open(filename);
     hashTable* table = new hashTable(fsize);
     while (getline(inFile, line)) {
-    // cout << regex_match(line,regex_val) << '\n';
-    if (line.size() <= 20 && regex_match(line, regex_val)) {
-        string S = str_tolower(line);
-        table->insert(S);
-    }
+        // cout << regex_match(line,regex_val) << '\n';
+        if (line.size() <= 20 && regex_match(line, regex_val)) {
+            string S = str_tolower(line);
+            table->insert(S);
+        }
     }
     inFile.close();
     return table;
-    }
+}
 
 void spellcheck(string in_file, string out_file, hashTable& table) {
     ifstream inFile;
@@ -67,23 +64,23 @@ void spellcheck(string in_file, string out_file, hashTable& table) {
         for (int i = 0; i < read_line.size(); i++) {
             string a = string(1, tolower(read_line[i]));
             if (regex_match(a, regex_val) > 0 || isdigit(read_line[i]) > 0) {
-            if (isdigit(read_line[i])) {
-                shouldCheck = false;
-            } else if (word.size() < 21) {
-                word += a;
-            }
+                if (isdigit(read_line[i])) {
+                    shouldCheck = false;
+                } else if (word.size() < 21) {
+                    word += a;
+                }
             } else {
-            if (shouldCheck && word.size() > 20) {
-                word.pop_back();
-                outFile << "Long word at line " << to_string(line_number)
-                        << ", starts: " << word << "\n";
-            } else if (shouldCheck && word.size() > 0 && !(table.contains(word))) {
-                outFile << "Unknown word at line " << to_string(line_number) << ": "
-                        << word << "\n";
-            }
-            // Word is complete
-            shouldCheck = true;
-            word = "";
+                if (shouldCheck && word.size() > 20) {
+                    word.pop_back();
+                    outFile << "Long word at line " << to_string(line_number)
+                            << ", starts: " << word << "\n";
+                } else if (shouldCheck && word.size() > 0 && !(table.contains(word))) {
+                    outFile << "Unknown word at line " << to_string(line_number) << ": "
+                            << word << "\n";
+                }
+                
+                shouldCheck = true;
+                word = "";
             }
         }
     // Handling words that might've been missed at the end of the string
@@ -99,7 +96,6 @@ void spellcheck(string in_file, string out_file, hashTable& table) {
 }
 
 int main() {
-    // these are initial values I used for testing: They are overwritten anyhow
     string dict_name; // = "wordlist_small.txt";
     cout << "Enter dictionary file: ";
     cin >> dict_name;
