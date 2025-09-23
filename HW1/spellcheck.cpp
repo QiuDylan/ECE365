@@ -19,7 +19,7 @@ string str_tolower(string s) {
 }
 // Insert dictionary into hash table
 hashTable* parse_dictionary(string filename) {
-    const regex regex_val = regex("^[A-Za-z'-] + $");
+    //const regex regex_val = regex("^[A-Za-z'-] + $");
     ifstream inFile;
     inFile.open(filename);
     string line;
