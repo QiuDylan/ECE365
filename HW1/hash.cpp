@@ -40,7 +40,7 @@ int hashTable::insert(const std::string &key, void *pv) {
     data[pos].pv = pv;
     filled++;
     
-    return 0; // Success
+    return 0; 
 }
 
 // Contains function
@@ -64,7 +64,7 @@ void *hashTable::getPointer(const std::string &key, bool *b) {
     }
 }
 
-// get pointer function
+// Set pointer function
 int hashTable::setPointer(const std::string &key, void *pv) {
     int pos = findPos(key);
     if (pos != -1) {
