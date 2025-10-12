@@ -4,23 +4,23 @@
 
 #include "hash.h"
 class heap {
-    private:    
-        typedef struct node_s {
-            std::string id;
-            int key;
-            void *val;
-        } node_t;
+      
+    typedef struct node_s {
+        std::string id;
+        int key;
+        void *val;
+    } node_t;
 
-        static inline const void  *stringkey(const std::string &key);
-        static inline std::size_t  stringsiz(const std::string &key);
+    static inline const void  *stringkey(const std::string &key);
+    static inline std::size_t  stringsiz(const std::string &key);
 
-        void percolate_down(std::size_t pos);
-        void percolate_up(std::size_t pos);
+    void percolate_down(std::size_t pos);
+    void percolate_up(std::size_t pos);
 
-        std::size_t     siz; //capacity
-        std::size_t     use; //number of slots currently used
-        hashTable  *map;
-        std::vector<node_t>  nodes;
+    std::size_t siz; //capacity
+    std::size_t use; //number of slots currently used
+    hashTable *map; //hashtable
+    std::vector<node_t> nodes; //actual binary heap
 
     public:
         heap(std::size_t siz = 1);

@@ -6,7 +6,7 @@
 void heap::percolate_down(std::size_t pos)
 {
     nodes[0] = nodes[pos];
-    auto prv = pos;
+    auto posCur = pos;
 
     while (pos << 1 <= use) {
         pos <<= 1;
@@ -14,35 +14,35 @@ void heap::percolate_down(std::size_t pos)
         if ((pos < use) && nodes[pos + 1].key < nodes[pos].key) ++pos;
 
         if (nodes[0].key > nodes[pos].key) {
-            nodes[prv] = nodes[pos];
-            map->setPointer(nodes[prv].id, &nodes[prv]);
+            nodes[posCur] = nodes[pos];
+            map->setPointer(nodes[posCur].id, &nodes[posCur]);
         } else break;
 
-        prv = pos;
+        posCur = pos;
     }
 
-    nodes[prv] = nodes[0];
-    map->setPointer(nodes[prv].id, &nodes[prv]);
+    nodes[posCur] = nodes[0];
+    map->setPointer(nodes[posCur].id, &nodes[posCur]);
 }
 
 void heap::percolate_up(std::size_t pos)
 {
     nodes[0] = nodes[pos];
-    auto prv = pos;
+    auto posCur = pos;
 
     while (pos >> 1 > 0) {
         pos >>= 1;
 
         if (nodes[0].key < nodes[pos].key) {
-            nodes[prv] = nodes[pos];
-            map->setPointer(nodes[prv].id, &nodes[prv]);
+            nodes[posCur] = nodes[pos];
+            map->setPointer(nodes[posCur].id, &nodes[posCur]);
         } else break;
 
-        prv = pos;
+        posCur = pos;
     }
 
-    nodes[prv] = nodes[0];
-    map->setPointer(nodes[prv].id, &nodes[prv]);
+    nodes[posCur] = nodes[0];
+    map->setPointer(nodes[posCur].id, &nodes[posCur]);
 }
 
 heap::heap(std::size_t siz)
@@ -81,10 +81,10 @@ int heap::setKey(const std::string &id, int key)
     if (p == nullptr) return 1;
 
     size_t pos = p - &nodes[0];
-    int prv_key    = nodes[pos].key;
+    int posCur_key    = nodes[pos].key;
     nodes[pos].key = key;
 
-    if (key < prv_key)
+    if (key < posCur_key)
         percolate_up(pos);
     else
         percolate_down(pos);

@@ -1,5 +1,5 @@
-useHeap.out: useHeap.o heap.o hash.o
-	g++ -o useHeap.out useHeap.o heap.o hash.o
+useHeap.exe: useHeap.o heap.o hash.o
+	g++ -o useHeap.exe useHeap.o heap.o hash.o
 
 useHeap.o: useHeap.cpp
 	g++ -c useHeap.cpp
@@ -11,10 +11,10 @@ hash.o: hash.cpp hash.h
 	g++ -c hash.cpp
 
 debug:
-	g++ -g -o useHeapDebug.out useHeap.cpp heap.cpp hash.cpp
+	g++ -g -o useHeapDebug.exe useHeap.cpp heap.cpp hash.cpp
 
 clean:
-	rm -f *.exe *.o *.stackdump *~ *.out
+	rm -f *.exe *.o *.stackdump *~
 
 backup:
 	test -d backups || mkdir backups
