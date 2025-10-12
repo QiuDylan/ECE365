@@ -14,8 +14,6 @@ class heap {
         static inline const void  *stringkey(const std::string &key);
         static inline std::size_t  stringsiz(const std::string &key);
 
-        // NOTE: these two aren't ideal, if there is nothing to
-        // percolate they cause an uncessary write to memory...
         void percolate_down(std::size_t pos);
         void percolate_up(std::size_t pos);
 
