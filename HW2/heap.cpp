@@ -55,8 +55,9 @@ heap::heap(std::size_t siz)
 
 heap::~heap(void)
 {
-    delete map;
+	delete map;
 }
+
 
 int heap::insert(const std::string &id, int key, void *val)
 {
