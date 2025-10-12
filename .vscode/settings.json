@@ -1,6 +1,7 @@
 {
   "files.associations": {
-    "fstream": "cpp"
+    "fstream": "cpp",
+    "__node_handle": "cpp"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "clang",
