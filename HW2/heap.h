@@ -6,9 +6,9 @@
 class heap {
     private:    
         typedef struct node_s {
-            std::string  id;
-            int          key;
-            void        *val;
+            std::string id;
+            int key;
+            void *val;
         } node_t;
 
         static inline const void  *stringkey(const std::string &key);
@@ -17,8 +17,8 @@ class heap {
         void percolate_down(std::size_t pos);
         void percolate_up(std::size_t pos);
 
-        std::size_t     siz;
-        std::size_t     use;
+        std::size_t     siz; //capacity
+        std::size_t     use; //number of slots currently used
         hashTable  *map;
         std::vector<node_t>  nodes;
 
@@ -28,15 +28,15 @@ class heap {
 
         int deleteMin(
             std::string  *id  = nullptr,
-            int          *key = nullptr,
-            void        **val = nullptr
+            int *key = nullptr,
+            void **val = nullptr
         );
         int insert(const std::string &id, int key, void *val = nullptr);
         int setKey(const std::string &id, int key);
         int remove(
             const std::string  &id,
-            int                *key = nullptr,
-            void              **val = nullptr
+            int *key = nullptr,
+            void **val = nullptr
         );
 };
 

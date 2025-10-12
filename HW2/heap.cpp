@@ -58,7 +58,6 @@ heap::~heap(void)
 	delete map;
 }
 
-
 int heap::insert(const std::string &id, int key, void *val)
 {
     if (use + 1 > siz) return 1;
@@ -104,9 +103,6 @@ int heap::deleteMin(std::string *id, int *key, void **val)
     
     if (use > 1) {
         nodes[1] = nodes[use--];
-        // FIXED: Removed the setPointer call here.
-        // The subsequent percolate_down call is now solely
-        // responsible for updating the map for the moved node.
         percolate_down(1);
     } else {
         use--;
@@ -127,8 +123,6 @@ int heap::remove(const std::string &id, int *key, void **val)
 
     if (pos != use) {
         nodes[pos] = nodes[use--];
-        // FIXED: Removed the setPointer call here.
-        // The percolation functions will handle the pointer update.
         if ((pos > 1) && (nodes[pos].key < nodes[pos >> 1].key))
             percolate_up(pos);
         else
