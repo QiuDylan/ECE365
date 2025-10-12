@@ -17,9 +17,9 @@ class heap {
         void percolate_down(std::size_t pos);
         void percolate_up(std::size_t pos);
 
-        std::size_t          siz;
-        std::size_t          use;
-        hashTable<std::string>    *idmap;
+        std::size_t     siz;
+        std::size_t     use;
+        hashTable  *map;
         std::vector<node_t>  nodes;
 
     public:
