@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/dylanqiu/Desktop/Cooper_Files/Fall_25/ECE365/ECE365/HW4",
+      "program": "/Users/dylanqiu/Desktop/Cooper_Files/Fall_25/ECE365/ECE365/HW4/build/Debug/outDebug"
+    }
+  ]
+}
